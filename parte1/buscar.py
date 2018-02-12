@@ -5,6 +5,8 @@
 # - Eduardo Larios Fernández - A00569364
 # - Oswaldo David García Rodríguez - A01026725
 # - Oscar Israel Lerma Franco - A01380817 
+
+# Numero de caracteres en ASCII Extendido, necesario para la función ord()
 NUM_CHARS = 256
 
 def siguiente_estado(patron, pat_len, estado, caracter):
