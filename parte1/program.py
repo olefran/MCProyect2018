@@ -7,13 +7,10 @@
 # - Oswaldo David García Rodríguez - A01026725
 # - Oscar Israel Lerma Franco - A01380817 
 
-# Numero de caracteres en ASCII Extendido, necesario para la función ord()
-NUM_CHARS = 256
-
 def siguiente_estado(patron, pat_len, estado, caracter):
     # Esta función obtiene el estado siguiente
     # Si el caracter es igual al encontrado en el patrón
-    # incrementados el estado (nos movemos hacia adelante)
+    # incrementamos el estado (nos movemos hacia adelante)
     # sig_est guarda temporalmente el resultado.
     i = 0 
 
@@ -30,35 +27,33 @@ def siguiente_estado(patron, pat_len, estado, caracter):
                 return sig_est
     return 0
 
-def crear_TF(patron, pat_len):
+def crear_TF(patron, pat_len, alfabeto_len):
     # Esta función construye la tabla de transiciones, 
     # la cual representa el AFD para el patrón dado
-    global NUM_CHARS
 
-    # Inicialización de una tabla de transiciones de tamaño PAT_LEN X NUM_CHARS con valores vacíos
-    TF = [[0 for i in range(NUM_CHARS)] for i in range(pat_len + 1)]
+    # Inicialización de una tabla de transiciones de tamaño PAT_LEN X ALFABETO con valores vacíos
+    TF = [[0 for i in range(alfabeto_len)] for i in range(pat_len + 1)]
     # creación de la tabla de transición 
     for estado in range(pat_len + 1):
-        for caracter in range(NUM_CHARS):
+        for caracter in range(alfabeto_len):
             TF[estado][caracter] = siguiente_estado(patron, pat_len, estado, caracter)
 
     return TF
 
-def buscar(patron, texto):
+def buscar(patron, texto, alfabeto):
     # Esta función simplemente imprime las ocurrencias del patrón
     # en el texto y el lugar donde aparecen (contando desde 1)
-    global NUM_CHARS
+    alfabeto_len = len(alfabeto)
     pat_len = len(patron)
     txt_len = len(texto)
     estado = 0
     total = 0
 
     # Creación de la tabla de transiciones
-    TF = crear_TF(patron, pat_len)
+    TF = crear_TF(patron, pat_len, alfabeto_len)
     # print(TF)
 
     # Procesa el texto utilizando la tabla de transiciones
-    
     for i in range(txt_len):
         estado = TF[estado][ord(texto[i])]
         if (estado == pat_len):
@@ -68,16 +63,16 @@ def buscar(patron, texto):
 def main():
     # Función de entrada del programa, espera por el input y manda a llamar la función de búsqueda.
     # Alfabeto indicado por el usuario
-    alphabeto = input()
+    alfabeto = input()
     
-    # Patron indicado por el usuasio
+    # Patrón indicado por el usuario
     patron = input()
 
-    # Cadena sobre la cual se buscara el patron
+    # Cadena sobre la cual se buscará el patrón
     texto = input()
 
     # Llamada a función de búsqueda, regresa el total de encuentros
-    print(buscar(patron, texto))
+    print(buscar(patron, texto, alfabeto))
 
 if __name__ == '__main__':
     main()
