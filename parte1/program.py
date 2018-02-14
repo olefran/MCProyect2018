@@ -66,7 +66,6 @@ def main():
         lines.append(line)
     # Función de entrada del programa, espera por el input y manda a llamar la función de búsqueda.
     # Alfabeto indicado por el usuario
-    print(lines)
     alfabeto = lines[0].replace("\n","");
     
     # Patrón indicado por el usuario
