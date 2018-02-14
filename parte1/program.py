@@ -6,6 +6,7 @@
 # - Eduardo Larios Fernández - A00569364
 # - Oswaldo David García Rodríguez - A01026725
 # - Oscar Israel Lerma Franco - A01380817 
+import fileinput
 
 def siguiente_estado(patron, pat_len, estado, caracter, alfabeto):
     # Esta función obtiene el estado siguiente
@@ -60,15 +61,19 @@ def buscar(patron, texto, alfabeto):
     return total
     
 def main():
+    lines =[]
+    for line in fileinput.input():
+        lines.append(line)
     # Función de entrada del programa, espera por el input y manda a llamar la función de búsqueda.
     # Alfabeto indicado por el usuario
-    alfabeto = input()
+    print(lines)
+    alfabeto = lines[0].replace("\n","");
     
     # Patrón indicado por el usuario
-    patron = input()
+    patron = lines[1].replace("\n","");
 
     # Cadena sobre la cual se buscará el patrón
-    texto = input()
+    texto = lines[2].replace("\n","");
 
     # Llamada a función de búsqueda, regresa el total de encuentros
     print(buscar(patron, texto, alfabeto))
